@@ -1,0 +1,338 @@
+//显示，隐藏
+@-webkit-keyframes show {
+  0%{
+    -webkit-transform: scale(0,0);
+    opacity: 0;
+
+  }
+  100%{
+    -webkit-transform: scale(1,1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes hide {
+  0%{
+    -webkit-transform: scale(1,1);
+    opacity: 1;
+  }
+  100%{
+    -webkit-transform: scale(0,0);
+    opacity: 0;
+  }
+}
+//淡入淡出
+@-webkit-keyframes fadein {
+  0%{
+
+    opacity: 0;
+  }
+  100%{
+
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeout {
+  0%{
+
+    opacity: 1;
+  }
+  100%{
+
+    opacity: 0;
+  }
+}
+//下拉
+@-webkit-keyframes up {
+  0%{
+    -webkit-transform: scale(1,1);
+
+
+  }
+  100%{
+    -webkit-transform: scale(1,0);
+
+  }
+}
+@-webkit-keyframes down {
+  0%{
+    -webkit-transform: scale(1,0);
+
+
+  }
+  100%{
+    -webkit-transform: scale(1,1);
+
+  }
+}
+//-------------------
+*[data-a=animate-up]{
+  -webkit-animation:  up 1s ease forwards;
+  -webkit-transform-origin: top;
+}
+*[data-a=animate-down]{
+  -webkit-animation:  down 1s ease forwards;
+  -webkit-transform-origin: top;
+}
+//-----------------------
+*[data-a=animate-fadein]{
+  -webkit-animation:  fadein 1s ease forwards;
+  -webkit-transform-origin: left top;
+}
+*[data-a=animate-fadeout]{
+  -webkit-animation:  fadeout 1s ease forwards;
+  -webkit-transform-origin: left top;
+  display: none;
+}
+//------------------
+*[data-a=animate-hide]{
+  -webkit-animation:  hide 1s ease forwards;
+  -webkit-transform-origin: top center;
+}
+*[data-a=animate-show]{
+  -webkit-animation:  show 1s ease forwards;
+  -webkit-transform-origin: top center;
+}
+//圆周运动
+
+
+
+
+
+
+//////////////////////////////
+
+
+
+
+
+
+
+
+
+@r:30;//半径
+@a-g:0;//角度
+@p:10;//速度
+@num:360/@p;
+//生成选择器
+.round(@i:0) when (@i<=@num){
+  @select:100/@num*@i*1%;
+  @a:@i*@p;
+  @{select}{
+    -webkit-transform:translate(cos(@a-g*pi()/180)*@r*1px,sin(@a-g*pi()/180)*@r*1px) ;
+  }
+  .round(@i+1);
+}
+@-webkit-keyframes  round {
+  .round()
+
+}
+
+
+@height:60px;
+@width:60px;
+@wait-r:40px;
+@wait-r1:70px;
+@wait-n:5;
+.wait(@i:0) when (@i<=@wait-n){
+  @x:'a@{i}';
+  @x1:'aa@{i}';
+  @deg:360/@wait-n*@i*pi()/180;
+  *[class=@{x}]{
+    width:@width;
+    height:@height;
+    line-height:@height;
+    text-align: center;
+    position: absolute;
+    color: #fff;
+    //font-size: 12px;
+    overflow: hidden;
+    left:cos(@deg)*@wait-r*1px;top:sin(@deg)*@wait-r*1px;
+    border-radius: 50%;
+  }
+  *[class=@{x1}]{
+    width:@width;
+    color: #fff;
+    overflow: hidden;
+    //font-size: 12px;
+    line-height:@height;
+    height:@height;
+    //line-height:40px;
+    //line-height:@height;
+    text-align: center;
+    position: absolute;
+    //padding: 65px 20px;
+
+    left:cos(@deg)*@wait-r1*1px;top:sin(@deg)*@wait-r1*1px;
+    border-radius: 50%;
+  }
+
+  .wait(@i+1);
+}
+
+
+.wait();
+
+@media screen and (min-width:747px){
+  @height1:200px;
+  @width1:200px;
+  @wait-r1:210px;
+  @wait-r:120px;
+
+  //@wait-n:5;
+  .wait(@i:0) when (@i<=@wait-n){
+    @x:'a@{i}';
+    @x1:'aa@{i}';
+
+    @deg:360/@wait-n*@i*pi()/180;
+
+    *[class=@{x1}]{
+      width:@width1;
+      color: #fff;
+      overflow: hidden;
+      height:@height1;
+      line-height:40px;
+      font-size: 16px;
+      //line-height:@height;
+      text-align: center;
+      position: absolute;
+      padding: 65px 20px;
+
+      left:cos(@deg)*@wait-r1*1px;top:sin(@deg)*@wait-r1*1px;
+      border-radius: 50%;
+    }
+    *[class=@{x}]{
+      width:@width1;
+      color: #fff;
+      font-size: 16px;
+      padding: 65px 20px;
+      //padding: 50px 20px;
+      height:@height1;
+      line-height:40px;
+      text-align: center;
+      position: absolute;
+      left:cos(@deg)*@wait-r*1px;top:sin(@deg)*@wait-r*1px;
+      border-radius: 50%;
+    }
+
+    .wait(@i+1);
+  }
+
+
+  .wait();
+}
+
+
+
+
+*[data=a]{
+  -webkit-animation:  round 2s linear infinite;
+
+}
+@-webkit-keyframes  round {
+
+  0%{
+    -webkit-transform:scale(1.0,1.0) ;
+  }
+
+  100%{
+    -webkit-transform:scale(0.7,0.7) ;
+  }
+}
+
+*[data=scale]{
+  -webkit-animation:  round 1s linear alternate  infinite;
+
+}
+
+
+
+
+
+@-webkit-keyframes circle {
+   0%{
+     -webkit-transform:rotate(0deg);
+   }
+   100%{
+     -webkit-transform:rotate(360deg);
+   }
+ }
+*[data-a*=animate-circle]{
+  -webkit-animation:  circle 20s linear infinite;
+
+}
+
+
+@-webkit-keyframes circle1 {
+  0%{
+    -webkit-transform:rotate(0deg);
+  }
+  100%{
+    -webkit-transform:rotate(360deg);
+  }
+}
+*[data-a*=animate-circle1]{
+  -webkit-animation:  circle1 1s ease ;
+
+}
+
+
+
+
+///曲线
+@q-r2:80;
+@q-r1:10;
+@q-a2:0;
+@q-a1:0;
+@q-p2:3;//速度
+@q-p1:20;//速度
+@q-num2:360/@q-p2;
+//生成选择器
+.round1(@i:0) when (@i<=@q-num2){
+  @select1:100/@q-num2*@i*1%;
+  @q-a2:@i*@q-p2;
+  @q-a1:@i*@q-p1;
+  @{select1}{
+    -webkit-transform:translate(cos(@q-a2*pi()/180)*@q-r2*1px,sin(@q-a1*pi()/180)*@q-r1*1px) ;
+  }
+  .round1(@i+1);
+}
+
+@-webkit-keyframes  quxian {
+  .round1();
+}
+*[data-a*=animate-quxian]{
+  -webkit-animation:  quxian 2s linear infinite;
+
+}
+
+@c-r:30;//半径
+@c-a:0;//角度
+@c-p:10;//速度
+@c-num:360/@c-p;
+//生成选择器
+.rounds(@j:0) when (@j<=@c-num){
+  @selectc:100/@c-num*@j*1%;
+  @c-a:@j*@c-p;
+  @{selectc}{
+    -webkit-transform:translate(cos(@c-a*pi()/180)*@c-r*1px,sin(@c-a*pi()/180)*@c-r*1px) ;
+  }
+  .rounds(@j+1);
+}
+@-webkit-keyframes  round1 {
+  .rounds();
+  //0%{
+  //  transform:translate(0,0) ;
+  //}
+}
+*[data-a*=animate-round1]{
+  -webkit-animation:  round1 2s linear infinite;
+  //transform-origin: left top;
+}
+
+
+
+
+
+
+
+
